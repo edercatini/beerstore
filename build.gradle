@@ -26,7 +26,6 @@ dependencies {
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-	compile 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.1.5.RELEASE'
-	runtime 'org.postgresql', name: 'postgresql', version: '42.2.5'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtime 'org.postgresql:postgresql'
 }
