@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class BeerResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CustomResponse<Beer> create(@RequestBody Beer beer) {
+    public CustomResponse<Beer> create(@Valid @RequestBody Beer beer) {
         Beer object = service.save(beer);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(object.getId()).toUri();
         return new CustomResponse<>(object, uri);
