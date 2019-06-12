@@ -12,5 +12,4 @@ public class BeerstoreApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

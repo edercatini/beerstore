@@ -45,7 +45,7 @@ public class BeerResource {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void put(@RequestBody Beer beer, @PathVariable Long id) {
+    public void put(@Valid @RequestBody Beer beer, @PathVariable Long id) {
         service.update(beer, id);
     }
 

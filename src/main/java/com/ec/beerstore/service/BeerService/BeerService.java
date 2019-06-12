@@ -2,11 +2,14 @@ package com.ec.beerstore.service.BeerService;
 
 import com.ec.beerstore.model.Beer;
 import com.ec.beerstore.repository.BeerRepository;
+import com.ec.beerstore.service.BeerService.exception.BeerAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class BeerService {
@@ -28,6 +31,12 @@ public class BeerService {
     }
 
     public Beer save(Beer beer) {
+        Beer existing = repository.findByNameAndType(beer.getName(), beer.getType());
+
+        if (!isNull(existing)) {
+            throw new BeerAlreadyExistsException();
+        }
+
         return repository.save(beer);
     }
 

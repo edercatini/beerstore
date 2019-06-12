@@ -1,6 +1,7 @@
 package com.ec.beerstore.error;
 
 import com.ec.beerstore.error.ErrorResponse.ApiError;
+import com.ec.beerstore.service.BeerService.exception.BeerAlreadyExistsException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,16 @@ public class ApiExceptionHandler {
         final String errorCode = "generic-1";
         final HttpStatus status = HttpStatus.BAD_REQUEST;
         final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale, exception.getValue()));
+
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(BeerAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateBeer(BeerAlreadyExistsException exception, Locale locale) {
+
+        final String errorCode = "beers-5";
+        final HttpStatus status = HttpStatus.BAD_REQUEST;
+        final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale));
 
         return ResponseEntity.badRequest().body(errorResponse);
     }
